@@ -6,8 +6,10 @@ import LoginForm from "../features/authentication/LoginForm";
 const LoginLayout = styled.main`
   min-height: 100vh;
   display: grid;
+  margin-top: 100;
+  padding: 5rem;
   grid-template-columns: 48rem;
-  align-content: center;
+  align-content: flex-start;
   justify-content: center;
   gap: 3.2rem;
   background-color: var(--color-grey-50);

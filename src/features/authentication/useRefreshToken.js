@@ -8,7 +8,6 @@ export default function useRefreshToken() {
       },
       withCredentials: true,
     });
-    console.log("response: ", response);
     return response.data.accessToken;
   };
   return refresh;

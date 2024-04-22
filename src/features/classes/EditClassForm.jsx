@@ -98,8 +98,6 @@ export default function EditClassForm() {
 
   const { classId, date: currentDate, time: currentTime } = classDetails;
 
-  console.log("students; ", studentsDropDown);
-
   function onSubmit(data) {
     const { date, time, studentFee } = data;
 

@@ -29,8 +29,6 @@ export default function AddPaymentForm2() {
   }
 
   function onSubmit({ studentId, payment, date }) {
-    console.log(studentId);
-
     if (studentId === "Select") {
       toast.error("Student Family detail is required");
       return;

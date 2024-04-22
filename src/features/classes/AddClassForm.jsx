@@ -77,9 +77,6 @@ export default function AddClassForm() {
       fee: Number(fee),
     }));
 
-    console.log("date in submit: ", date, dayjs(date).format("MM/DD/YYYY"));
-    console.log("time in submit: ", time, dayjs(time).format("hh:mm A"));
-
     const addClassData = {
       date,
       time,
