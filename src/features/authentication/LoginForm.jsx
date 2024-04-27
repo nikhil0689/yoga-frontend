@@ -5,8 +5,10 @@ import Input from "../../ui/Input";
 import FormRowVertical from "../../ui/FormRowVertical";
 import { useLogin } from "./useLogin";
 import { useAuth } from "../../context/AuthContext";
+import { useQueryClient } from "@tanstack/react-query";
 
 function LoginForm() {
+  const queryClient = useQueryClient();
   const { clearSessionData } = useAuth();
   const [userId, setUserId] = useState("aish3095");
   const [password, setPassword] = useState("admin");
@@ -27,6 +29,7 @@ function LoginForm() {
   }
 
   useEffect(() => {
+    queryClient.removeQueries();
     clearSessionData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

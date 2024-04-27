@@ -2,6 +2,7 @@ import { AxiosError } from "axios";
 import axios, { axiosPrivate } from "./axios";
 
 export async function login(loginCreds) {
+  console.log("coming inside login api");
   try {
     const response = await axios.post(
       "/authenticate/login",
@@ -17,15 +18,18 @@ export async function login(loginCreds) {
     const { data } = response;
     return data;
   } catch (err) {
+    console.log("error in catch: ", err);
     if (err instanceof AxiosError) {
       const { response, message } = err;
       if (!response) {
         throw new Error(message);
       }
       const { data, status } = response;
-      throw new Error(data.message, status);
+      console.log("status: ", status);
+      throw new Error(data.message);
     } else {
-      throw new Error(err.message, err.statusCode);
+      console.log("err.statusCode: ", err);
+      throw new Error(err.message);
     }
   }
 }

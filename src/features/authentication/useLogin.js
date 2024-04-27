@@ -18,7 +18,7 @@ export function useLogin() {
     },
     onError: (err) => {
       console.log("ERROR", err);
-      toast.error(err.message);
+      toast.error(`Unable to Log in at this time. ${err}`);
     },
   });
 

@@ -2,6 +2,7 @@ import { AxiosError } from "axios";
 import { axiosPrivate } from "./axios";
 
 export async function getSessionUser() {
+  console.log("get session user");
   try {
     const fetchResponse = await axiosPrivate.get(`/users/me`);
     const { data } = fetchResponse;
