@@ -6,21 +6,25 @@ import FormRowVertical from "../../ui/FormRowVertical";
 import { useLogin } from "./useLogin";
 import { useAuth } from "../../context/AuthContext";
 import { useQueryClient } from "@tanstack/react-query";
+import Spinner from "../../ui/Spinner";
 
 function LoginForm() {
   const queryClient = useQueryClient();
   const { clearSessionData } = useAuth();
   const [userId, setUserId] = useState("aish3095");
   const [password, setPassword] = useState("admin");
+  const [loadData, setLoadData] = useState(false);
   const { login, isLoading } = useLogin();
 
   function handleSubmit(e) {
+    setLoadData(true);
     e.preventDefault();
     if (!userId || !password) return;
     login(
       { userId, password },
       {
         onSettled: () => {
+          setLoadData(false);
           setUserId("");
           setPassword("");
         },
@@ -33,6 +37,10 @@ function LoginForm() {
     clearSessionData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (isLoading || loadData) {
+    return <Spinner />;
+  }
 
   return (
     <Form onSubmit={handleSubmit}>

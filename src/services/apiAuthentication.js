@@ -1,8 +1,9 @@
 import { AxiosError } from "axios";
 import axios, { axiosPrivate } from "./axios";
+import { URL } from "../utils/constants";
 
 export async function login(loginCreds) {
-  console.log("coming inside login api");
+  console.log("coming inside login api", URL);
   try {
     const response = await axios.post(
       "/authenticate/login",
