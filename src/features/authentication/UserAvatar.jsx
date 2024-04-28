@@ -26,7 +26,7 @@ function UserAvatar() {
   const { sessionUser } = auth;
   return (
     <StyledUserAvatar>
-      <Avatar src={"default-user.jpg"} alt={`Avatar of`} />
+      <Avatar src={"/default-user.jpg"} alt={`Avatar of`} />
       <span>{sessionUser.firstName + " " + sessionUser.lastName}</span>
     </StyledUserAvatar>
   );
