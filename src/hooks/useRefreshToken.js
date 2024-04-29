@@ -20,8 +20,8 @@ export default function useRefreshToken() {
       );
 
       const { data } = response;
-      const { accessToken, user } = data;
-
+      const { accessToken, refreshToken, user } = data;
+      localStorage.setItem("jwt", refreshToken);
       setAccessToken(accessToken);
       setSessionUser(user.props);
 
