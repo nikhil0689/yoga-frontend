@@ -11,9 +11,10 @@ export function useLogin() {
   const { mutate: login, isLoading } = useMutation({
     mutationFn: ({ userId, password }) => loginApi({ id: userId, password }),
     onSuccess: (data) => {
-      const { accessToken, user } = data;
+      const { accessToken, refreshToken, user } = data;
       setAccessToken(accessToken);
       setSessionUser(user.props);
+      localStorage.setItem("jwt", refreshToken);
       navigate("/home", { replace: true });
     },
     onError: (err) => {

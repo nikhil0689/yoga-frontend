@@ -22,14 +22,12 @@ const useAxiosPrivate = () => {
     const responseIntercept = axiosPrivate.interceptors.response.use(
       (response) => response,
       async (error) => {
-        console.log("error in axios private 1");
         const prevRequest = error?.config;
         if (
           error?.response?.status === 401 ||
           (error?.response?.status === 403 && !prevRequest?.sent)
         ) {
           prevRequest.sent = true;
-          console.log("using refresh token", error);
           try {
             const newAccessToken = await refresh();
             prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
@@ -38,7 +36,6 @@ const useAxiosPrivate = () => {
             console.log("error in axios private");
           }
         }
-        console.log("coming here in reject: ", error);
         return Promise.reject(error);
       }
     );

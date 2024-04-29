@@ -15,6 +15,7 @@ function AuthProvider({ children }) {
 
   const clearSessionData = () => {
     setAuth(() => ({ token: null, sessionUser: null }));
+    localStorage.clear();
   };
 
   return (

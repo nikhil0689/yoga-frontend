@@ -7,12 +7,17 @@ export default function useRefreshToken() {
 
   const refresh = async () => {
     try {
-      const response = await axios.post("/authenticate/refresh", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      });
+      const response = await axios.post(
+        "/authenticate/refresh",
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("jwt"),
+          },
+          withCredentials: true,
+        }
+      );
 
       const { data } = response;
       const { accessToken, user } = data;
