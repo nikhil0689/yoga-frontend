@@ -16,7 +16,7 @@ import FormRowButton from "../../ui/FormRowButton";
 import StyledDatePicker from "../../ui/DatePickerStyle";
 import StyledDatePickersLayout from "../../ui/DatePickerLayoutStyle";
 
-export default function AddPaymentForm2() {
+export default function AddPaymentForm() {
   const moveBack = useMoveBack();
   const { families, isLoading: isLoadingFamilies } = useFamilies();
   const { addPayment, isLoading: isAddingPayment } = useAddPayment();

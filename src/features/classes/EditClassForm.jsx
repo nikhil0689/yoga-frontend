@@ -6,7 +6,6 @@ import Input from "../../ui/Input";
 import Spinner from "../../ui/Spinner";
 import StyledSelect from "../../ui/Select";
 import { useMoveBack } from "../../hooks/useMoveBack";
-import { useStudents } from "../students/useStudents";
 import ButtonIcon from "../../ui/ButtonIcon";
 import RemoveIcon from "@mui/icons-material/Remove";
 import styled from "styled-components";
@@ -26,6 +25,7 @@ import dayjs from "dayjs";
 import StyledDatePicker from "../../ui/DatePickerStyle";
 import StyledDatePickersLayout from "../../ui/DatePickerLayoutStyle";
 import StyledTimePicker from "../../ui/TimePickerStyle";
+import { useAllStudents } from "../students/useAllStudents";
 
 const Stacked = styled.div`
   display: flex;
@@ -55,8 +55,10 @@ const Error = styled.span`
 export default function EditClassForm() {
   const navigate = useNavigate();
   const [initialized, setInitialized] = useState(false);
-  const { students: studentsDropDown, isLoading: isLoadingStudents } =
-    useStudents();
+
+  const { allStudents: studentsDropDown, isLoading: isLoadingStudents } =
+    useAllStudents();
+
   const { classDetails, isLoading: isLoadingClass, error } = useClass();
 
   const { deleteClass, isDeleting } = useDeleteClass();

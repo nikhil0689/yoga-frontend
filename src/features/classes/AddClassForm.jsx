@@ -6,7 +6,6 @@ import Input from "../../ui/Input";
 import Spinner from "../../ui/Spinner";
 import StyledSelect from "../../ui/Select";
 import { useMoveBack } from "../../hooks/useMoveBack";
-import { useStudents } from "../students/useStudents";
 import ButtonIcon from "../../ui/ButtonIcon";
 import RemoveIcon from "@mui/icons-material/Remove";
 import styled from "styled-components";
@@ -21,6 +20,7 @@ import StyledDatePicker from "../../ui/DatePickerStyle";
 import StyledDatePickersLayout from "../../ui/DatePickerLayoutStyle";
 import StyledTimePicker from "../../ui/TimePickerStyle";
 import StyledTimePickersLayout from "../../ui/TimePickerLayoutStyle";
+import { useAllStudents } from "../students/useAllStudents";
 
 const Stacked = styled.div`
   display: flex;
@@ -52,14 +52,14 @@ export default function AddClassForm() {
   const { errors } = formState;
 
   const moveBack = useMoveBack();
-  const { students, isLoading: isLoadingStudents } = useStudents();
+  const { allStudents, isLoading: isLoadingStudents } = useAllStudents();
   const { addClass, isLoading: isAddingClass } = useAddClass();
 
   if (isLoadingStudents) {
     return <Spinner />;
   }
 
-  if (!students || students.length === 0) {
+  if (!allStudents || allStudents.length === 0) {
     return <Empty resourceName="students" />;
   }
 
@@ -75,7 +75,6 @@ export default function AddClassForm() {
   };
 
   function onSubmit(data) {
-    console.log("coming inside onsubmit", data);
     const { date, time, studentFee } = data;
 
     if (studentFee.length === 0) {
@@ -161,7 +160,7 @@ export default function AddClassForm() {
                 <>
                   <StyledSelect as="select" {...field}>
                     <option value="">Select</option>{" "}
-                    {students.map((user) => (
+                    {allStudents.map((user) => (
                       <option key={user.id} value={user.id}>
                         {user.name}
                       </option>

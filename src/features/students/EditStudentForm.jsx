@@ -24,7 +24,7 @@ export default function EditStudentForm() {
   const { editStudent, isEditing } = useEditStudent();
 
   // React hook form
-  const { register, formState, handleSubmit, reset } = useForm();
+  const { register, formState, handleSubmit, reset, getValues } = useForm();
   const { errors } = formState;
 
   if (isLoadingFamilies || isLoading) {
@@ -64,6 +64,11 @@ export default function EditStudentForm() {
     );
   }
 
+  const isPhoneRequired = (family) => {
+    // Check if "familyId" is empty or "Select"
+    return !family || family === "Select";
+  };
+
   function onError(errors) {
     console.log("error in onerror", errors);
   }
@@ -82,11 +87,21 @@ export default function EditStudentForm() {
 
       <FormRow label="Phone Number" error={errors?.phone?.message}>
         <Input
-          type="text"
+          type="number"
           id="phone"
           defaultValue={phone}
           disabled={isLoading}
-          {...register("phone", { required: "This field is required" })}
+          {...register("phone", {
+            minLength: { value: 10, message: "Invalid Phone no." },
+            maxLength: { value: 10, message: "Invalid Phone no." },
+            validate: {
+              required: (value) => {
+                if (!value && isPhoneRequired(getValues("family")))
+                  return "Required when family is not selected.";
+                return true;
+              },
+            },
+          })}
         />
       </FormRow>
 

@@ -15,7 +15,8 @@ export default function AddStudentForm() {
   const moveBack = useMoveBack();
   const { families, isLoading: isLoadingFamilies } = useFamilies();
   const { addStudent, isLoading: isAddingStudent } = useAddStudent();
-  const { register, formState, handleSubmit, reset } = useForm();
+  const { register, formState, handleSubmit, reset, getValues, clearErrors } =
+    useForm();
   const { errors } = formState;
   const isLoading = false;
 
@@ -46,6 +47,12 @@ export default function AddStudentForm() {
     });
   }
 
+  const isPhoneRequired = (family) => {
+    console.log("coming here: ", family);
+    // Check if "familyId" is empty or "Select"
+    return !family || family === "Select";
+  };
+
   return (
     <>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -60,10 +67,20 @@ export default function AddStudentForm() {
 
         <FormRow label="Phone Number" error={errors?.phone?.message}>
           <Input
-            type="text"
+            type="number"
             id="phone"
             disabled={isLoading}
-            {...register("phone", { required: "This field is required" })}
+            {...register("phone", {
+              minLength: { value: 10, message: "Invalid Phone no." },
+              maxLength: { value: 10, message: "Invalid Phone no." },
+              validate: {
+                required: (value) => {
+                  if (!value && isPhoneRequired(getValues("family")))
+                    return "Required when family is not selected.";
+                  return true;
+                },
+              },
+            })}
           />
         </FormRow>
 
@@ -96,6 +113,7 @@ export default function AddStudentForm() {
             as="select"
             id="family"
             defaultValue="None"
+            onChange={() => clearErrors()}
             {...register("family", { required: false })}
           >
             <option value="Select">Select</option>
