@@ -98,11 +98,27 @@ export default function EditClassForm() {
 
   const { classId, date: currentDate, time: currentTime } = classDetails;
 
+  const hasDuplicateStudentId = (studentFee) => {
+    const seen = new Set();
+    for (const { studentId } of studentFee) {
+      if (seen.has(studentId)) {
+        return true; // Duplicate studentId found
+      }
+      seen.add(studentId);
+    }
+    return false; // No duplicate studentId found
+  };
+
   function onSubmit(data) {
     const { date, time, studentFee } = data;
 
     if (studentFee.length === 0) {
       toast.error("Student and fee details are required for the class");
+      return;
+    }
+
+    if (hasDuplicateStudentId(studentFee)) {
+      toast.error("Duplicate entries of Student and fee details found");
       return;
     }
 

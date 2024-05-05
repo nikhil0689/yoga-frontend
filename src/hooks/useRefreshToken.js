@@ -1,4 +1,3 @@
-import toast from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
 import axios from "../services/axios";
 
@@ -28,8 +27,6 @@ export default function useRefreshToken() {
       return response.data.accessToken;
     } catch (error) {
       // Handle any errors that occur during token refresh
-      console.error("Error refreshing token:", error);
-      toast.error("Session timed out due to inactivity");
       clearSessionData();
       throw error; // Re-throw the error to propagate it to the caller
     }

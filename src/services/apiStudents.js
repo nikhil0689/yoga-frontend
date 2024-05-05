@@ -98,7 +98,6 @@ export async function addStudent(newStudent) {
         withCredentials: true,
       }
     );
-    console.log("Response from axiosPrivate : ", response);
     const { data } = response;
     const { accessToken } = data;
     return accessToken;
@@ -128,7 +127,6 @@ export async function editStudent({ newStudent, studentId }) {
         withCredentials: true,
       }
     );
-    console.log("Response from axiosPrivate : ", response);
     const { data } = response;
     const { accessToken } = data;
     return accessToken;

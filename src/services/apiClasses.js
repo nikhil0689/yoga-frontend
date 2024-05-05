@@ -73,7 +73,6 @@ export async function addClass(classDetails) {
       "/classes",
       JSON.stringify(classDetails)
     );
-    console.log("Response from axios : ", response);
     const { data } = response;
     const { accessToken } = data;
     return accessToken;
@@ -97,7 +96,6 @@ export async function editClass({ classDetails, classId }) {
       `/classes/${classId}`,
       JSON.stringify(classDetails)
     );
-    console.log("Response from axios : ", response);
     const { data } = response;
     const { accessToken } = data;
     return accessToken;
@@ -118,7 +116,6 @@ export async function editClass({ classDetails, classId }) {
 export async function deleteClass(classId) {
   try {
     const response = await axiosPrivate.delete(`/classes/${classId}`, {});
-    console.log("Response from axios : ", response);
     const { data } = response;
     const { accessToken } = data;
     return accessToken;

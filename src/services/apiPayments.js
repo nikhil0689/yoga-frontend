@@ -60,7 +60,6 @@ export async function addPayment(newPayment) {
         withCredentials: true,
       }
     );
-    console.log("Response from axiosPrivate : ", response);
     const { data } = response;
     const { accessToken } = data;
     return accessToken;
@@ -90,7 +89,6 @@ export async function editPayment({ editedPayment, paymentId }) {
         withCredentials: true,
       }
     );
-    console.log("Response from axiosPrivate : ", response);
     const { data } = response;
     const { accessToken } = data;
     return accessToken;
@@ -116,7 +114,6 @@ export async function deletePayment(paymentId) {
       },
       withCredentials: true,
     });
-    console.log("Response from axiosPrivate : ", response);
     const { data } = response;
     const { accessToken } = data;
     return accessToken;

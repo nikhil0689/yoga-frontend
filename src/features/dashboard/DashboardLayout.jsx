@@ -5,6 +5,10 @@ import Spinner from "../../ui/Spinner";
 import { useDashboardStats } from "./useDashboardStats";
 import Empty from "../../ui/Empty";
 import StudentBalanceList from "./StudentBalanceList";
+import { useDashboardMonthlyClassesStats } from "./useDashboardMonthlyClassesStats";
+import MonthlyClassesData from "./MonthlyClassesData";
+import { useDashboardMonthlyPaymentsStats } from "./useDashboardMonthlyPaymentsStats";
+import MonthlyPaymentsData from "./MonthlyPaymentsData";
 
 const StyledDashboardLayout = styled.div`
   display: grid;
@@ -23,7 +27,23 @@ export default function DashboardLayout() {
   const { isDashboardStatsLoading, dashboardStats, error } =
     useDashboardStats();
 
-  if (isDashboardStatsLoading) {
+  const {
+    isMonthlyClassesStatsLoading,
+    dashboardMonthlyClassesStats: monthlyStats,
+    error: monthlyStatsError,
+  } = useDashboardMonthlyClassesStats();
+
+  const {
+    isMonthlyPaymentsStatsLoading,
+    dashboardMonthlyPaymentsStats,
+    error: monthlyPaymentsError,
+  } = useDashboardMonthlyPaymentsStats();
+
+  if (
+    isDashboardStatsLoading ||
+    isMonthlyPaymentsStatsLoading ||
+    isMonthlyClassesStatsLoading
+  ) {
     return <Spinner />;
   }
 
@@ -31,10 +51,12 @@ export default function DashboardLayout() {
     return <Empty resourceName="dashboard" />;
   }
 
-  if (error) {
+  if (error || monthlyStatsError || monthlyPaymentsError) {
     console.log("error message: ", error);
   }
 
+  const { data } = monthlyStats;
+  const { data: paymentStats } = dashboardMonthlyPaymentsStats;
   return (
     <>
       <StyledDashboardLayout>
@@ -42,7 +64,9 @@ export default function DashboardLayout() {
       </StyledDashboardLayout>
       <StyledDashboardLayout1>
         <StudentBalanceList />
+        <MonthlyClassesData monthlyStats={data} />
       </StyledDashboardLayout1>
+      <MonthlyPaymentsData monthlyPaymentStats={paymentStats} />
     </>
   );
 }

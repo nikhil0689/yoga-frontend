@@ -7,16 +7,13 @@ import toast from "react-hot-toast";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 function ProtectedRoute({ children }) {
-  console.log("coming inside protected route");
   useAxiosPrivate();
-  console.log("coming inside protected route 2");
   const { user, isLoading, error } = useUser();
   const { auth } = useAuth();
   const { sessionUser } = auth;
 
   useEffect(() => {
     if (error && !isLoading) {
-      console.log("error in use effect: ", error);
       toast.error("Log in please!!");
     }
   }, [error, isLoading, user]);
@@ -26,7 +23,6 @@ function ProtectedRoute({ children }) {
   }
 
   if (!sessionUser) {
-    console.log("redirect to login page");
     // If user data is missing or there's an error, navigate to login
     return <Navigate replace to="login" />;
   }
