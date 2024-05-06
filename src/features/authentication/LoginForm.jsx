@@ -11,8 +11,8 @@ import Spinner from "../../ui/Spinner";
 function LoginForm() {
   const queryClient = useQueryClient();
   const { clearSessionData } = useAuth();
-  const [userId, setUserId] = useState("admin-test-user");
-  const [password, setPassword] = useState("admin");
+  const [userId, setUserId] = useState("");
+  const [password, setPassword] = useState("");
   const [loadData, setLoadData] = useState(false);
   const { login, isLoading } = useLogin();
 
