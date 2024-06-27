@@ -24,11 +24,11 @@ export default function StudentsTable() {
 
   return (
     <>
-      <Table columns="2fr 2fr 4fr 4fr 2fr 4rem">
+      <Table columns="1fr 1fr 1fr 3fr 2fr 4rem">
         <Table.Header>
           <div>Name</div>
+          <div>Classes</div>
           <div>Phone</div>
-          <div>Email</div>
           <div>Address</div>
           <div>Family</div>
         </Table.Header>
