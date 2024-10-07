@@ -4,6 +4,7 @@ import Table from "../../ui/Table";
 import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 import ButtonIcon from "../../ui/ButtonIcon";
+import Button from "../../ui/Button";
 
 const DataItem = styled.div`
   font-size: 1.4rem;
@@ -22,7 +23,16 @@ export default function StudentRow({
   return (
     <Table.Row>
       <DataItem>{name}</DataItem>
-      <DataItem>{classCount}</DataItem>
+      <DataItem>
+        <Button
+          type="button"
+          variation="primary"
+          onClick={() => navigate(`/students/${studentId}/classes`)}
+          size="medium"
+        >
+          {classCount}
+        </Button>
+      </DataItem>
       <DataItem>{phone}</DataItem>
       <DataItem>{address}</DataItem>
       <DataItem>

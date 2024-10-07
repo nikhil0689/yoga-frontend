@@ -19,6 +19,7 @@ import EditPayment from "./pages/EditPayment";
 import Login from "./pages/Login";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./ui/ProtectedRoute";
+import StudentClasses from "./pages/StudentClasses";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -52,6 +53,10 @@ function App() {
                 <Route path="students" element={<Students />} />
                 <Route path="students/addStudent" element={<AddStudent />} />
                 <Route path="students/:studentId" element={<EditStudent />} />
+                <Route
+                  path="students/:studentId/classes"
+                  element={<StudentClasses />}
+                />
                 <Route path="payments" element={<Payments />} />
                 <Route path="payments/addPayment" element={<AddPayment />} />
                 <Route path="payments/:paymentId" element={<EditPayment />} />
